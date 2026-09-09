@@ -3,7 +3,7 @@ import streamlit as st
 
 st.title("⏱️ เกมเติมศัพท์จับเวลา")
 
-# 1. กำหนดค่าเริ่มต้นใน session_state ถ้ายังไม่มี
+# 1. กำหนดค่าเริ่มต้นใน session_state ถ้ายังไม่มี (รองรับทั้ง 4 ข้อ)
 if "ans1_val" not in st.session_state:
     st.session_state.ans1_val = ""
 if "ans2_val" not in st.session_state:
@@ -12,7 +12,6 @@ if "ans3_val" not in st.session_state:
     st.session_state.ans3_val = ""
 if "ans4_val" not in st.session_state:
     st.session_state.ans4_val = ""
-
 
 
 # 📌 ฟังก์ชันเคลียร์ค่าเมื่อกดปุ่มเริ่มใหม่
@@ -38,7 +37,6 @@ def show_result_dialog(ans1, ans2, ans3, ans4):
     u_ans3 = ans3.strip().lower()
     u_ans4 = ans4.strip().lower()
 
-
     # ตรวจข้อ 1
     if u_ans1 == "apple":
         st.success("✅ ข้อ 1: ถูกต้อง")
@@ -52,21 +50,21 @@ def show_result_dialog(ans1, ans2, ans3, ans4):
         score += 1
     else:
         st.error(f"❌ ข้อ 2: ยังไม่ถูกต้อง (คุณตอบ '{u_ans2}')")
-      
+
     # ตรวจข้อ 3
-      if u_ans3 == "watermelon":
+    if u_ans3 == "watermelon":
         st.success("✅ ข้อ 3: ถูกต้อง")
         score += 1
     else:
         st.error(f"❌ ข้อ 3: ยังไม่ถูกต้อง (คุณตอบ '{u_ans3}')")
-      
+
     # ตรวจข้อ 4
-if u_ans4 == "banana":
+    if u_ans4 == "banana":
         st.success("✅ ข้อ 4: ถูกต้อง")
         score += 1
     else:
         st.error(f"❌ ข้อ 4: ยังไม่ถูกต้อง (คุณตอบ '{u_ans4}')")
-      
+
     st.info(f"🏆 ได้คะแนนรวม: {score} คะแนน")
 
     if score == 4:
@@ -102,11 +100,11 @@ ans2 = st.text_input(
     value=st.session_state.ans2_val,
 )
 ans3 = st.text_input(
-    "ข้อ 1: A `W _ _ e r m _ _ _ n` have a green rind and red flesh inside. 🍉",
+    "ข้อ 3: A `W _ _ e r m _ _ _ n` have a green rind and red flesh inside. 🍉",
     value=st.session_state.ans3_val,
 )
 ans4 = st.text_input(
-    "ข้อ 1: Monkeys like to eat `B a _ _ _ a`. 🍌",
+    "ข้อ 4: Monkeys like to eat `B a _ _ _ a`. 🍌",
     value=st.session_state.ans4_val,
 )
 
@@ -115,9 +113,6 @@ st.session_state.ans1_val = ans1
 st.session_state.ans2_val = ans2
 st.session_state.ans3_val = ans3
 st.session_state.ans4_val = ans4
-
-# ✏️ [พื้นที่สำหรับนักเรียน]: เพิ่มข้อ 3, 4 ตรงนี้
-
 
 # 4. ปุ่มส่งคำตอบ
 if "start" in st.session_state and not st.session_state.get("is_ended", False):
@@ -134,5 +129,3 @@ if st.session_state.get("is_ended", False):
 
 st.divider()
 st.write("นางสุจินันท์ เมธา เลขที่ 2 ม.4/17")
-
-
